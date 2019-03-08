@@ -8,6 +8,8 @@
   },
   "scripts": {
     "compile": "truffle compile",
+    "migrate": "truffle migrate",
+    "ganache": "ganache-cli --mnemonic \"bone ripple jeans toddler drink soft coast shell emerge chat wolf produce\"",
     "predeploy": "npm run --prefix client build",
     "deploy": "gh-pages -d client/build"
   },
@@ -28,6 +30,10 @@
   "homepage": "https://cryptowedding.echtnice.com",
   "dependencies": {
     "gh-pages": "^2.0.1",
+    "openzeppelin-solidity": "^2.1.3",
     "truffle": "5.0.4"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.4.1"
   }
 }
