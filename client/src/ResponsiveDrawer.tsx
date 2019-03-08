@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -23,6 +23,7 @@ import {
   WithTheme
 } from "@material-ui/core/styles";
 import Pixi from "./Pixi";
+import About from "./About";
 
 const drawerWidth = 240;
 
@@ -87,6 +88,18 @@ class ResponsiveDrawer extends React.Component<
         <div className={classes.toolbar} />
         <Divider />
         <List>
+          <ListItem
+            button
+            key={"About"}
+            component={({ innerRef, ...props }) => (
+              <Link {...props} to="/about" />
+            )}
+          >
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary={"About"} />
+          </ListItem>
           {["Upcoming", "Past", "Create"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
@@ -111,55 +124,60 @@ class ResponsiveDrawer extends React.Component<
     );
 
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              cryptowedding
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <nav className={classes.drawer}>
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              variant="temporary"
-              anchor={theme.direction === "rtl" ? "right" : "left"}
-              open={this.state.mobileOpen}
-              onClose={this.handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper
-              }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Pixi />
-        </main>
-      </div>
+      <Router>
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit" noWrap>
+                cryptowedding
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <nav className={classes.drawer}>
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                variant="temporary"
+                anchor={theme.direction === "rtl" ? "right" : "left"}
+                open={this.state.mobileOpen}
+                onClose={this.handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <div>
+              <Route path="/" exact component={Pixi} />
+              <Route path="/about/" component={About} />
+            </div>
+          </main>
+        </div>
+      </Router>
     );
   }
 }
