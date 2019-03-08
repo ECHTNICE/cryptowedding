@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+
+path {
+    fill: transparent;
+}
+
+text {
+    fill: #aa9999;
+}
+
+svg{
+    font-family: 'Great Vibes', cursive;
+    font-size: 7rem;
+}
