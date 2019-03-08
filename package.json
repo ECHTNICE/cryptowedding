@@ -7,7 +7,10 @@
     "test": "test"
   },
   "scripts": {
-    "compile": "truffle compile"
+    "postinstall": "npm install --prefix client",
+    "compile": "truffle compile",
+    "predeploy": "npm run --prefix client build",
+    "deploy": "gh-pages -d client/build"
   },
   "repository": {
     "type": "git",
@@ -25,6 +28,7 @@
   },
   "homepage": "https://cryptowedding.echtnice.com",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "truffle": "5.0.4"
   }
 }
