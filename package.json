@@ -7,7 +7,6 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "npm install --prefix client",
     "compile": "truffle compile",
     "predeploy": "npm run --prefix client build",
     "deploy": "gh-pages -d client/build"
