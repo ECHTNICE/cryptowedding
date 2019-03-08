@@ -2,8 +2,23 @@ import React, { Component } from "react";
 import "./Certificate.css";
 import {Grid} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper/Paper";
+import {Howl, Howler} from 'howler';
+
+
 
 class Certificate extends Component {
+
+    componentDidMount(){
+        /*var sound = new Howl({
+            src: ['audio/01.mp3'],
+            autoplay: true,
+            loop: true,
+            volume: 0.5,
+            onend: function() {
+                console.log('Finished!');
+            }
+        });*/
+    }
 
      SvgWithXlink () {
         return (
