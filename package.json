@@ -1,0 +1,30 @@
+{
+  "name": "cryptowedding",
+  "version": "0.1.0",
+  "description": "ETHParis 2019 hackathon - Arrange a wedding for your NFTs ",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "compile": "truffle compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ECHTNICE/cryptowedding.git"
+  },
+  "keywords": [],
+  "author": "Paul Mizel <pmizel@echtnice.com>",
+  "contributors": [
+    "Fabian Raetz <fraetz@echtnice.com>",
+    "Andrey Kuchaev <akuchaev@echtnice.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ECHTNICE/cryptowedding/issues"
+  },
+  "homepage": "https://cryptowedding.echtnice.com",
+  "dependencies": {
+    "truffle": "5.0.4"
+  }
+}
