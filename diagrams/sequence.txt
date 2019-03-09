@@ -1,0 +1,47 @@
+title CryptoWedding
+
+Alice->WeddingContract: createWedding()
+note right of Alice
+    Params:
+    tokenContractId, 
+    tokenId, 
+    bobAddress, 
+    openDuration
+    
+    Returns:
+    weddingId
+end note
+Alice-->Bob: EMail with link to weddingId
+Bob->+WeddingContract: acceptWedding()
+note left of Bob
+    Params:
+    tokenContractId, 
+    tokenId,
+    weddingId
+end note
+
+WeddingContract->WeddingCertificate: createWeddingCertificates()
+WeddingContract->-Bob:
+
+opt invite guests
+    Alice-->Guests: Invite-EMail/Twitter with link
+    Bob-->Guests: Invite-EMail/Twitter with link
+
+    Guests->WeddingContract: joinWdding()
+    note left of Guests
+    Params:
+    tokenContractId, 
+    tokenId,
+    weddingId
+end note
+end
+
+
+opt dispose wedding
+    Guests->WeddingContract: leaveWdding()
+    alt divorce Alice
+        Alice->WeddingContract: divorce(weddingId)
+    else divorse Bob
+        Bob->WeddingContract: divorce(weddingId)
+    end
+end
