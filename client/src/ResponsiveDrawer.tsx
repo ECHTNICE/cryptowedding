@@ -12,6 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MailIcon from "@material-ui/icons/Mail";
+import AddIcon from "@material-ui/icons/Add";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -25,6 +26,8 @@ import {
 import Pixi from "./Pixi";
 import About from "./About";
 import Certificate from "./Certificate";
+import { Fab } from "@material-ui/core";
+import Weddings from "./Weddings";
 
 const drawerWidth = 240;
 
@@ -58,6 +61,14 @@ const styles = (theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing.unit * 3
+    },
+    fabButton: {
+      position: "absolute",
+      zIndex: 1,
+      top: 25,
+      left: 0,
+      right: 0,
+      margin: "0 auto"
     }
   });
 
@@ -91,49 +102,40 @@ class ResponsiveDrawer extends React.Component<
         <List>
           <ListItem
             button
-            key={"About"}
+            key={"Weddings"}
+            component={({ innerRef, ...props }) => <Link {...props} to="/" />}
+          >
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Weddings"} />
+          </ListItem>
+          <ListItem
+            button
+            key={"Certificate"}
             component={({ innerRef, ...props }) => (
-              <Link {...props} to="/about" />
+              <Link {...props} to="/certificate" />
             )}
           >
             <ListItemIcon>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary={"About"} />
+            <ListItemText primary={"Certificate"} />
           </ListItem>
-            <ListItem
-                button
-                key={"Certificate"}
-                component={({ innerRef, ...props }) => (
-                    <Link {...props} to="/certificate" />
-                )}
-            >
-                <ListItemIcon>
-                    <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary={"Certificate"} />
-            </ListItem>
-
-          {["Upcoming", "Past", "Create"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
         </List>
         <Divider />
-        <List>
-          {["All mail"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <ListItem
+          button
+          key={"About"}
+          component={({ innerRef, ...props }) => (
+            <Link {...props} to="/about" />
+          )}
+        >
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={"About"} />
+        </ListItem>
       </div>
     );
 
@@ -154,6 +156,13 @@ class ResponsiveDrawer extends React.Component<
               <Typography variant="h6" color="inherit" noWrap>
                 cryptowedding
               </Typography>
+              <Fab
+                color="secondary"
+                aria-label="Add"
+                className={classes.fabButton}
+              >
+                <AddIcon />
+              </Fab>
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer}>
@@ -186,7 +195,8 @@ class ResponsiveDrawer extends React.Component<
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <div>
-              <Route path="/" exact component={Pixi} />
+              <Route path="/" exact component={Weddings} />
+              <Route path="/wedding/:weddingId" component={Pixi} />
               <Route path="/about/" component={About} />
               <Route path="/certificate/" component={Certificate} />
             </div>
