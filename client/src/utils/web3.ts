@@ -30,3 +30,21 @@ export async function getWeddingsContract3() {
     getWeddingsContractAddress()
   );
 }
+
+export async function getNftTokenIdsOfAccount() {
+  const web3 = await getWeb3();
+  const nft = await getTestNftContract3();
+
+  const accounts = await web3.eth.getAccounts();
+  const account = accounts[0];
+
+  const balance = await nft.methods.balanceOf(account).call();
+
+  const tokenIdPromises = [];
+  for (let i = 0; i < balance; i++) {
+    tokenIdPromises.push(nft.methods.tokenOfOwnerByIndex(account, i).call());
+  }
+  const tokenIds = await Promise.all(tokenIdPromises);
+
+  return tokenIds;
+}

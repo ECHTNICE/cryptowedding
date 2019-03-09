@@ -29,6 +29,7 @@ import Certificate from "./Certificate";
 import { Fab } from "@material-ui/core";
 import Weddings from "./Weddings";
 import CreateWedding from "./CreateWedding";
+import AcceptWedding from "./AcceptWedding";
 
 const drawerWidth = 240;
 
@@ -202,6 +203,11 @@ class ResponsiveDrawer extends React.Component<
               <Route path="/" exact component={Weddings} />
               <Route path="/wedding/:weddingId" component={Pixi} />
               <Route path="/create" exact component={CreateWedding} />
+              <Route
+                path="/accept/:weddingId"
+                exact
+                component={AcceptWedding}
+              />
               <Route path="/about/" component={About} />
               <Route path="/certificate/" component={Certificate} />
             </div>
