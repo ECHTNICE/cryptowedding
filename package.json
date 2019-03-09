@@ -8,6 +8,7 @@
   },
   "scripts": {
     "compile": "truffle compile",
+    "test": "truffle test",
     "migrate": "truffle migrate",
     "ganache": "ganache-cli --mnemonic \"bone ripple jeans toddler drink soft coast shell emerge chat wolf produce\"",
     "predeploy": "npm run --prefix client build",
