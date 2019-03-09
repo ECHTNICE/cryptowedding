@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
-
-path {
+svg.certificate-text path {
     fill: transparent;
 }
 
-text {
+svg.certificate-text text {
     fill: #aa9999;
 }
 
-svg{
+svg.certificate-text{
     font-family: 'Great Vibes', cursive;
     font-size: 6rem;
 }

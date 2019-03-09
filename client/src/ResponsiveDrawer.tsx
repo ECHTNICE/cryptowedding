@@ -154,7 +154,7 @@ class ResponsiveDrawer extends React.Component<
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" color="inherit" noWrap>
-                cryptowedding
+                CryptoWedding
               </Typography>
               <Fab
                 color="secondary"
