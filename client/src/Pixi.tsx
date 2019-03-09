@@ -14,6 +14,9 @@ class Pixi extends Component<IPixiProps> {
     pixi_cnt: HTMLDivElement | null = null;
     app: PIXI.Application;
 
+    bg:string = "01"; //background max=03
+    ms:string = "01"; //minister max=03
+
     constructor(props: IPixiProps) {
         super(props);
 
@@ -55,7 +58,7 @@ class Pixi extends Component<IPixiProps> {
 
         // create a new background sprite
         var background = PIXI.Sprite.fromImage(
-            process.env.PUBLIC_URL + "/assets/bg02.jpg"
+            process.env.PUBLIC_URL + "/assets/bg"+this.bg+".jpg"
         );
         background.width = 800;
         background.height = 600;
@@ -63,10 +66,14 @@ class Pixi extends Component<IPixiProps> {
 
 
         var ms = new PIXI.projection.Sprite2d(PIXI.Texture.fromImage(
-            process.env.PUBLIC_URL + '/assets/ms02.png'));
+            process.env.PUBLIC_URL + "/assets/ms"+this.ms+".png"));
         ms.anchor.set(0.5, 1.0);
         ms.proj.affine = PIXI.projection.AFFINE.AXIS_X; // return to affine after rotating
         ms.position.set(this.app.screen.width * 1 / 2, this.app.screen.height / 2 + 120);
+        ms.scale.set(1.0);
+        (ms as any).zoom = 1.0;
+        (ms as any).zoomOn = 1.1;
+        this.addPassiveInteraction(ms);
         this.app.stage.addChild(ms);
 
         // create
@@ -76,6 +83,9 @@ class Pixi extends Component<IPixiProps> {
         u1.proj.affine = PIXI.projection.AFFINE.AXIS_X; // return to affine after rotating
         u1.position.set(this.app.screen.width * 1 / 2 + 100, this.app.screen.height / 2 + 120);
         u1.scale.set(0.1);
+        (u1 as any).zoom = 0.1;
+        (u1 as any).zoomOn = 0.2;
+        this.addPassiveInteraction(u1);
         this.app.stage.addChild(u1);
 
         /*var step = 0;
@@ -91,6 +101,10 @@ class Pixi extends Component<IPixiProps> {
         u2.proj.affine = PIXI.projection.AFFINE.AXIS_X; // return to affine after rotating
         u2.position.set(this.app.screen.width * 1 / 2 - 100, this.app.screen.height / 2 + 120);
         u2.scale.set(0.1);
+        u2.scale.set(0.1);
+        (u2 as any).zoom = 0.1;
+        (u2 as any).zoomOn = 0.2;
+        this.addPassiveInteraction(u2);
         this.app.stage.addChild(u2);
 
         //speed up the process, because OVERLAY and HARD_LIGHT will use copyTex instead of readPixels
@@ -299,6 +313,25 @@ class Pixi extends Component<IPixiProps> {
     }
 
     // === INTERACTION CODE  ===
+    addPassiveInteraction(obj: any) {
+        obj.interactive = true;
+        obj
+            .on('pointerdown', this.onZoom)
+            .on('pointerupoutside', this.onZoomEnd)
+            .on('pointermove', this.onZoom);
+    }
+
+    onZoom(event: any) {
+        var obj = event.currentTarget;
+        obj.scale.set(obj.zoomOn);
+        event.stopPropagation();
+    }
+
+    onZoomEnd(event: any) {
+        var obj = event.currentTarget;
+        obj.scale.set(obj.zoom);
+        event.stopPropagation();
+    }
 
     addInteraction(obj: any) {
         obj.interactive = true;
