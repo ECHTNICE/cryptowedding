@@ -24,6 +24,7 @@ import {
 } from "@material-ui/core/styles";
 import Pixi from "./Pixi";
 import About from "./About";
+import Certificate from "./Certificate";
 
 const drawerWidth = 240;
 
@@ -100,6 +101,19 @@ class ResponsiveDrawer extends React.Component<
             </ListItemIcon>
             <ListItemText primary={"About"} />
           </ListItem>
+            <ListItem
+                button
+                key={"Certificate"}
+                component={({ innerRef, ...props }) => (
+                    <Link {...props} to="/certificate" />
+                )}
+            >
+                <ListItemIcon>
+                    <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Certificate"} />
+            </ListItem>
+
           {["Upcoming", "Past", "Create"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
@@ -174,6 +188,7 @@ class ResponsiveDrawer extends React.Component<
             <div>
               <Route path="/" exact component={Pixi} />
               <Route path="/about/" component={About} />
+              <Route path="/certificate/" component={Certificate} />
             </div>
           </main>
         </div>
