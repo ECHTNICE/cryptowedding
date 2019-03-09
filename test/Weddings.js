@@ -60,6 +60,13 @@ contract("Weddings", accounts => {
     assert.equal(wedding.openDuration.valueOf(), 0);
   });
 
+  it("should return getLatestWeddingId", async () => {
+    const instance = await Weddings.deployed();
+
+    const weddingId = await instance.getLatestWeddingId.call();
+    assert.equal(weddingId.valueOf(), 1);
+  });
+
   it("should accept wedding", async () => {
     const testNftInstance = await TestNFT.deployed();
     const instance = await Weddings.deployed();

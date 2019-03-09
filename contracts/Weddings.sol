@@ -33,17 +33,23 @@ contract Weddings {
     }
 
     Counter.Counter private _weddingId;
+    uint256 private _latestWeddingId;
+
     mapping(uint256 => Wedding) public weddings;
     mapping(address => mapping(uint256 => uint256)) private _proposerToWeddingIds;
 
     constructor() public {
-
+        _latestWeddingId = 0;
     }
 
     // XXX: Needs AbiEncoderV2
     //function getWedding(uint256 weddingId) public returns (Wedding memory wedding) {
     //    return _weddings[weddingId];
     //}
+
+    function getLatestWeddingId() public view returns (uint256 weddingId) {
+        return _latestWeddingId;
+    }
 
     function getWeddingIdByProposer(address tokenContractAddr, uint256 tokenId) 
         public view returns (uint256 weddingId) {
@@ -66,8 +72,10 @@ contract Weddings {
         require(msg.sender == tokenContract.ownerOf(tokenId), "Token not owned by sender");
         require(partnerAddr != address(0), "partner must not be 0");
 
+        _latestWeddingId = _weddingId.next();
+
         Wedding memory wedding = Wedding({
-            id: _weddingId.next(),
+            id: _latestWeddingId,
             state: WeddingState.Proposed,
 
             tokenContractA: tokenContractAddr,
