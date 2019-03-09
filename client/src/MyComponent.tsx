@@ -5,7 +5,7 @@ import BigNumber from "bignumber.js";
 
 export interface IMyComponentProps {
   address: string;
-  myBalance: BigNumber;
+  myBalance?: BigNumber;
 }
 
 @light({
@@ -18,7 +18,7 @@ class MyComponent extends React.Component<IMyComponentProps> {
     return (
       <div>
         The balance of {this.props.address} is{" "}
-        {this.props.myBalance.toFormat(2)}.
+        {this.props.myBalance && this.props.myBalance.toFormat(2)}.
       </div>
     );
   }

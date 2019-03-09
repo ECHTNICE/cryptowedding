@@ -38,6 +38,8 @@ contract Weddings {
     mapping(uint256 => Wedding) public weddings;
     mapping(address => mapping(uint256 => uint256)) private _proposerToWeddingIds;
 
+    event WeddingAccepted(uint256 indexed weddingId);
+
     constructor() public {
         _latestWeddingId = 0;
     }
@@ -109,6 +111,8 @@ contract Weddings {
         wedding.state = WeddingState.Accepted;
         wedding.tokenContractB = tokenContractAddr;
         wedding.tokenIdB = tokenId;
+
+        //emit WeddingAccepted(weddingId);
 
         return true;
     }

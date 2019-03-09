@@ -8,9 +8,9 @@
   },
   "scripts": {
     "compile": "truffle compile",
-    "test": "truffle test",
-    "migrate": "truffle migrate",
-    "ganache": "ganache-cli --mnemonic \"bone ripple jeans toddler drink soft coast shell emerge chat wolf produce\"",
+    "test": "truffle test --network test",
+    "migrate": "truffle migrate --reset",
+    "ganache": "ganache-cli --networkId 8545 --mnemonic \"bone ripple jeans toddler drink soft coast shell emerge chat wolf produce\"",
     "predeploy": "npm run --prefix client build",
     "deploy": "gh-pages -d client/build"
   },
