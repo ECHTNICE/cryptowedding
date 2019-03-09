@@ -201,7 +201,7 @@ class ResponsiveDrawer extends React.Component<
             <div className={classes.toolbar} />
             <div>
               <Route path="/" exact component={Weddings} />
-              <Route path="/wedding/:weddingId" component={Pixi} />
+              <Route path="/wedding/:weddingId/:view" component={Pixi} />
               <Route path="/create" exact component={CreateWedding} />
               <Route
                 path="/accept/:weddingId"

@@ -3,27 +3,45 @@ import * as PIXI from "pixi.js";
 import "pixi-picture";
 import "pixi-projection";
 import "pixi-layers";
-import IconButton from "@material-ui/core/IconButton/IconButton";
-import {PhotoCamera} from "@material-ui/icons";
-
+import {Howl} from 'howler';
 
 export interface IPixiProps {
+    match:any
 }
 
 class Pixi extends Component<IPixiProps> {
     pixi_cnt: HTMLDivElement | null = null;
     app: PIXI.Application;
 
-    bg:string = "01"; //background max=03
-    ms:string = "01"; //minister max=03
+    bg: string = "01"; //background max=03
+    ms: string = "01"; //minister max=03
+    audio: string = "01"; //minister max=03
 
     constructor(props: IPixiProps) {
         super(props);
+
+        if (props.match.params.view != undefined) {
+            this.bg = this.props.match.params.view; //background max=03
+            this.ms = this.props.match.params.view; //minister max=03
+            this.audio = this.props.match.params.view; //minister max=03
+        }
 
         this.app = new PIXI.Application({
             width: 800,
             height: 600,
             transparent: false
+        });
+    }
+
+    componentDidMount() {
+        var sound = new Howl({
+            src: [process.env.PUBLIC_URL + "/assets/" + this.audio + ".mp3"],
+            autoplay: true,
+            loop: true,
+            volume: 0.5,
+            onend: function () {
+                console.log('Finished!');
+            }
         });
     }
 
@@ -58,7 +76,7 @@ class Pixi extends Component<IPixiProps> {
 
         // create a new background sprite
         var background = PIXI.Sprite.fromImage(
-            process.env.PUBLIC_URL + "/assets/bg"+this.bg+".jpg"
+            process.env.PUBLIC_URL + "/assets/bg" + this.bg + ".jpg"
         );
         background.width = 800;
         background.height = 600;
@@ -66,13 +84,13 @@ class Pixi extends Component<IPixiProps> {
 
 
         var ms = new PIXI.projection.Sprite2d(PIXI.Texture.fromImage(
-            process.env.PUBLIC_URL + "/assets/ms"+this.ms+".png"));
+            process.env.PUBLIC_URL + "/assets/ms" + this.ms + ".png"));
         ms.anchor.set(0.5, 1.0);
         ms.proj.affine = PIXI.projection.AFFINE.AXIS_X; // return to affine after rotating
         ms.position.set(this.app.screen.width * 1 / 2, this.app.screen.height / 2 + 120);
         ms.scale.set(1.0);
         (ms as any).zoom = 1.0;
-        (ms as any).zoomOn = 1.1;
+        (ms as any).zoomOn = 1.3;
         this.addPassiveInteraction(ms);
         this.app.stage.addChild(ms);
 
@@ -316,20 +334,12 @@ class Pixi extends Component<IPixiProps> {
     addPassiveInteraction(obj: any) {
         obj.interactive = true;
         obj
-            .on('pointerdown', this.onZoom)
-            .on('pointerupoutside', this.onZoomEnd)
-            .on('pointermove', this.onZoom);
+            .on('pointerdown', this.onZoom);
     }
 
     onZoom(event: any) {
         var obj = event.currentTarget;
-        obj.scale.set(obj.zoomOn);
-        event.stopPropagation();
-    }
-
-    onZoomEnd(event: any) {
-        var obj = event.currentTarget;
-        obj.scale.set(obj.zoom);
+        obj.scale.set(obj.scale._x == obj.zoomOn ? obj.zoom : obj.zoomOn);
         event.stopPropagation();
     }
 
@@ -398,14 +408,19 @@ class Pixi extends Component<IPixiProps> {
     }
 
     render() {
-        return (<div>
-            <div ref={this.updatePixiCnt}/>
-            <a id="link">
-                <IconButton color="primary" component="span">
-                    <PhotoCamera/>
-                </IconButton>
-            </a>
-        </div>);
+        return (
+            <div>
+                <div ref={this.updatePixiCnt}/>
+
+
+                <p className="triangle-border top">
+                    I, ____, take you, ____, to be my lawfully wedded NFT, to have and to hold, from this day
+                    forward, for better, for worse, for richer, for poorer, in sickness and in health, until death do us
+                    part.
+                    <br/><br/>
+                    What God has joined, men must not divide.
+                </p>
+            </div>);
     }
 }
 
