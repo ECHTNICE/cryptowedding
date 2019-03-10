@@ -51,6 +51,9 @@ canvas {
 .bg-active{
     background-color: #e91e63;
 }
+.text-active{
+    color: #e91e63;
+}
 
 a{
     color: #e91e63;
