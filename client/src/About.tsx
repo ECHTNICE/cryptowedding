@@ -3,6 +3,8 @@ import "./About.css";
 import {Grid} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper/Paper";
 
+
+
 class About extends Component {
     render() {
         return (
@@ -27,12 +29,17 @@ class About extends Component {
                             </p><p>
                                 Since we were dealing with real world problems, we wanted to take a break and do something completely different than always to save the world. ;-)
                             </p>
-                            <hr/>
+
                             <p>
                                 Built at #ETHParis in Paris with ❤ by the Team of ECHTNICE and Asure.Network.
                             </p>
 
+                            <h2>READ MORE...</h2>
+                            <p>
 
+                            </p>
+
+                            <hr/>
 
                             <h2>MIT License</h2>
 
