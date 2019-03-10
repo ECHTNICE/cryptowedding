@@ -89,7 +89,7 @@ class WeddingCard extends React.Component<any,
                             <MoreVertIcon/>
                         </IconButton>
                     }
-                    title="0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5"
+                    title="0xcbBc3D..."
                     subheader="March 10, 2019"
                 />
                 <CardActionArea onClick={()=>{
