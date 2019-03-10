@@ -97,9 +97,7 @@ const styles = (theme: Theme) =>
       position: "absolute",
       zIndex: 1,
       top: 25,
-      left: 0,
-      right: 0,
-      margin: "0 auto"
+      right: 25
     }
   });
 
@@ -147,9 +145,7 @@ const styles = (theme: Theme) =>
             position: "absolute",
             zIndex: 1,
             top: 25,
-            left: 0,
-            right: 0,
-            margin: "0 auto"
+            right: 25,
         }
     });*/
 
