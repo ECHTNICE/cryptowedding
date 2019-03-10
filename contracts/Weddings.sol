@@ -18,6 +18,11 @@ contract Weddings {
         Divorsed
     }
 
+    struct WeddingGuest {
+        address tokenContract;
+        uint256 tokenId;
+    }
+
     struct Wedding {
         uint256 id;
         WeddingState state;
@@ -30,12 +35,14 @@ contract Weddings {
         uint256 tokenIdB;
 
         uint256 openDuration;
+        uint256 guestCount;
     }
 
     Counter.Counter private _weddingId;
     uint256 private _latestWeddingId;
 
     mapping(uint256 => Wedding) public weddings;
+    mapping(uint256 => WeddingGuest[]) public weddingGuests;
     mapping(address => mapping(uint256 => uint256)) private _proposerToWeddingIds;
 
     event WeddingAccepted(uint256 indexed weddingId);
@@ -87,7 +94,8 @@ contract Weddings {
             tokenContractB: address(0),
             tokenIdB: 0,
 
-            openDuration: openDuration
+            openDuration: openDuration,
+            guestCount: 0
         });
         weddings[wedding.id] = wedding;
         _proposerToWeddingIds[tokenContractAddr][tokenId] = wedding.id;
@@ -119,9 +127,25 @@ contract Weddings {
 
     function joinWedding(
         uint256 weddingId,
-        address tokenContract,
+        address tokenContractAddr,
         uint256 tokenId)
         public returns (bool success) {
+        require(weddingId != 0, "weddingId must not be 0");
+        require(tokenContractAddr != address(0), "tokenContractAddr must not be 0");
+        require(tokenId != 0, "tokenId must not be 0");
+        IERC721 tokenContract = IERC721(tokenContractAddr);
+        require(msg.sender == tokenContract.ownerOf(tokenId), "Token not owned by sender");
+
+        Wedding storage wedding = weddings[weddingId];
+        require(wedding.state == WeddingState.Proposed || wedding.state == WeddingState.Accepted, "Must be Proposed or Accepted");
+        wedding.guestCount++;
+
+        WeddingGuest memory guest = WeddingGuest({
+            tokenContract: tokenContractAddr,
+            tokenId: tokenId
+        });
+        weddingGuests[weddingId].push(guest);
+
         return true;
     }
 
