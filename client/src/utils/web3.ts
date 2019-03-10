@@ -31,6 +31,24 @@ export async function getWeddingsContract3() {
   );
 }
 
+export async function getWeddingList() {
+  const weddingContract = await getWeddingsContract3();
+  let latestWeddingId = await weddingContract.methods
+    .getLatestWeddingId()
+    .call();
+
+  latestWeddingId = latestWeddingId.valueOf();
+  const weddingListPromises = [];
+  while (latestWeddingId > 0 && weddingListPromises.length < 10) {
+    weddingListPromises.push(getWedding(latestWeddingId));
+    latestWeddingId--;
+  }
+
+  const weddingList = await Promise.all(weddingListPromises);
+  console.log("wedding list", weddingList);
+  return weddingList;
+}
+
 export async function getWedding(weddingId: string) {
   const weddingContract = await getWeddingsContract3();
 
