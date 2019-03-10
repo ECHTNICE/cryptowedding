@@ -10,6 +10,8 @@ const WeddingState = {
 
 contract("Weddings", accounts => {
   const partner = accounts[1];
+  const guest = accounts[2];
+
   const openDuration = 0;
 
   it("should create new wedding", async () => {
@@ -86,5 +88,25 @@ contract("Weddings", accounts => {
 
     assert.equal(wedding.tokenContractB, tokenContractAddr);
     assert.equal(wedding.tokenIdB.valueOf(), tokenId);
+  });
+
+  it("should join guest", async () => {
+    const testNftInstance = await TestNFT.deployed();
+    const instance = await Weddings.deployed();
+
+    const tokenContractAddr = testNftInstance.address;
+    const tokenId = 9;
+
+    const weddingId = 1;
+    await instance.joinWedding(weddingId, tokenContractAddr, tokenId, {
+      from: guest
+    });
+
+    const wedding = await instance.weddings.call(weddingId);
+    const weddingGuest = await instance.weddingGuests.call(weddingId, 0);
+
+    assert.equal(wedding.guestCount.valueOf(), 1);
+    assert.equal(weddingGuest.tokenId.valueOf(), tokenId);
+    assert.equal(weddingGuest.tokenContract, tokenContractAddr);
   });
 });
