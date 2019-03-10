@@ -114,12 +114,12 @@ class WeddingCard extends React.Component<any,
                                     (this.props as any).history.push('/wedding/'+this.props.weddingId+'/'+this.props.roomView);
                                 }}
                     >
-                        <FavoriteIcon/> <span style={{fontSize:"14px"}}>20</span>
+                        <FavoriteIcon/> <span style={{fontSize:"14px"}}> {Math.round((Math.random()*20+12))}</span>
                     </IconButton>
 
 
-                    <a href="https://twitter.com/intent/tweet?text=Hi,%20join%20my%20crypto%20%20wedding%20%20party!%20%20https://cryptowedding.echtnice.com/wedding/0/01"
-                    target="_blank" style={{color:"#444444"}}>
+                    <a href={"https://twitter.com/intent/tweet?text=Hi,%20join%20my%20crypto%20%20wedding%20%20party!%20%0A%0Ahttps://cryptowedding.echtnice.com/wedding/"+this.props.weddingId+"/"+this.props.roomView+"%0A%0A%23cryptowedding%20%23ethereum%20%23blockchain"}
+                        target="_blank" style={{color:"#444444"}}>
                         <ShareIcon/>
                     </a>
 
