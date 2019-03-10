@@ -40,6 +40,21 @@ export async function getWedding(weddingId: string) {
   return wedding;
 }
 
+export async function getWeddingGuests(wedding: any) {
+  const weddingContract = await getWeddingsContract3();
+
+  const guestPromises = [];
+  for (let i = 0; i < wedding.guestCount; i++) {
+    guestPromises.push(
+      weddingContract.methods.weddingGuests(wedding.id, i).call()
+    );
+  }
+  const guests = await Promise.all(guestPromises);
+
+  console.log("Wedding guests", guests);
+  return guests;
+}
+
 export async function getNftTokenIdsOfAccount() {
   const web3 = await getWeb3();
   const nft = await getTestNftContract3();
