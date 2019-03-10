@@ -31,6 +31,15 @@ export async function getWeddingsContract3() {
   );
 }
 
+export async function getWedding(weddingId: string) {
+  const weddingContract = await getWeddingsContract3();
+
+  const wedding = await weddingContract.methods.weddings(weddingId).call();
+
+  console.log("Wedding", wedding);
+  return wedding;
+}
+
 export async function getNftTokenIdsOfAccount() {
   const web3 = await getWeb3();
   const nft = await getTestNftContract3();

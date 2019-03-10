@@ -7,7 +7,8 @@ import {
   MenuItem,
   Button,
   Grid,
-  Paper
+  Paper,
+  Typography
 } from "@material-ui/core";
 import {
   withStyles,
@@ -25,6 +26,7 @@ import {
   getWeddingsContract3,
   getNftTokenIdsOfAccount
 } from "./utils/web3";
+import { Link } from "react-router-dom";
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -43,6 +45,14 @@ const styles = (theme: Theme) =>
       padding: theme.spacing.unit * 2,
       textAlign: "center",
       color: theme.palette.text.secondary
+    },
+    nftImageContainer: {
+      display: "flex",
+      width: "100%",
+      justifyContent: "center"
+    },
+    nftImage: {
+      height: 150
     }
   });
 
@@ -118,6 +128,14 @@ class CreateWedding extends Component<
     this.setState({ weddingId: weddingId });
   };
 
+  getNftImageUrl = () => {
+    return (
+      "https://img.cryptokitties.co/0x06012c8cf97bead5deae237070f9587f8e7a266d/" +
+      this.state.tokenId +
+      ".png"
+    );
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -126,7 +144,21 @@ class CreateWedding extends Component<
       resultBox = (
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            WeddingId {this.state.weddingId}
+            <h1>Success!</h1>
+            <Typography variant="body1" gutterBottom>
+              Inform the NFT of your life about your wedding proposal by sharing
+              the following link with its owner.
+              <Link to={"/accept/" + this.state.weddingId}>
+                Link to wedding proposal
+              </Link>
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Invite all your friends to your wedding by sharing the following
+              link with them.
+              <Link to={"/join/" + this.state.weddingId}>
+                Link to join the wedding as guest
+              </Link>
+            </Typography>
           </Paper>
         </Grid>
       );
@@ -135,10 +167,10 @@ class CreateWedding extends Component<
     //console.log("balanceOf", this.props.x.valueOf());
     return (
       <div>
-        <h1>Create wedding</h1>
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>
+              <h1>Wedding proposal</h1>
               <form noValidate autoComplete="off" className={classes.root}>
                 <TextField
                   id="standard-full-width"
@@ -195,6 +227,13 @@ class CreateWedding extends Component<
                   </Select>
                 </FormControl>
 
+                <div className={classes.nftImageContainer}>
+                  <img
+                    className={classes.nftImage}
+                    src={this.getNftImageUrl()}
+                  />
+                </div>
+
                 <Button
                   variant="contained"
                   color="primary"
@@ -215,24 +254,3 @@ class CreateWedding extends Component<
 }
 
 export default withStyles(styles, { withTheme: true })(CreateWedding);
-
-/*<FormControl>
-<InputLabel htmlFor="tokenId">TokenId</InputLabel>
-<Select
-  value={this.state.tokenId}
-  onChange={this.handleTokenIdChange}
-  inputProps={{
-    name: "tokenId",
-    id: "tokenId"
-  }}
->
-  <MenuItem value="">
-    <em>None</em>
-  </MenuItem>
-  {this.state.tokenIds.map(tokenId => (
-    <MenuItem key={tokenId} value={tokenId}>
-      {tokenId}
-    </MenuItem>
-  ))}
-</Select>
-</FormControl>*/
