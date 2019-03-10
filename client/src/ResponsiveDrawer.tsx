@@ -26,6 +26,7 @@ import Weddings from "./Weddings";
 import CreateWedding from "./CreateWedding";
 import AcceptWedding from "./AcceptWedding";
 import classNames from 'classnames';
+import JoinWedding from "./JoinWedding";
 
 const drawerWidth = 240;
 
@@ -229,6 +230,11 @@ class ResponsiveDrawer extends React.Component<IResponsiveDrawerProps,
                                 path="/accept/:weddingId"
                                 exact
                                 component={AcceptWedding}
+                            />
+                                                        <Route
+                                path="/join/:weddingId"
+                                exact
+                                component={JoinWedding}
                             />
                             <Route path="/about/" component={About}/>
                             <Route path="/certificate/" component={Certificate}/>
