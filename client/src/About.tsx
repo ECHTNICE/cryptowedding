@@ -12,7 +12,6 @@ class About extends Component {
                         <Paper style={{padding: "15px"}}>
                             <h1>About</h1>
 
-
                             <h2>WHAT IS CRYPTOWEDDING?</h2>
                             <p>
                                 Cryptoweddings allows anyone to display their marriage for the world to see forever on
@@ -27,17 +26,16 @@ class About extends Component {
                                 Cryptoweddings allows anyone to display their marriage for the world to see forever on
                                 the Ethereum blockchain.
                             </p>
-
                             <hr/>
-                            <h3>CryptoWedding</h3>
-
                             <p>
                                 Built at #ETHParis in Paris with ❤ by the Team of ECHTNICE and Asure.Network.
                             </p>
 
+
+
                             <h2>MIT License</h2>
 
-                            Copyright &copy; 2019 ECHTNICE
+                            Copyright &copy; 2019 <a href="https://echtnice.com" target="_blank">ECHTNICE</a> and <a href="https://asure.network" target="_blank">ASURE.NETWORK</a>
                             <p>
                                 Permission is hereby granted, free of charge, to any person obtaining a copy
                                 of this software and associated documentation files (the "Software"), to deal
