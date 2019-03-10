@@ -23,8 +23,9 @@ class About extends Component {
 
                             <h2>WHY CRYPTOWEDDING?</h2>
                             <p>
-                                Cryptoweddings allows anyone to display their marriage for the world to see forever on
-                                the Ethereum blockchain.
+                                There are more and more NFTs and we wanted to show that there are many more use cases for NFTs and all that with something fun and a wink.
+                            </p><p>
+                                Since we were dealing with real world problems, we wanted to take a break and do something completely different than always to save the world. ;-)
                             </p>
                             <hr/>
                             <p>

@@ -17,6 +17,7 @@ import {Link} from "react-router-dom";
 import Button from "@material-ui/core/Button/Button";
 import CardActionArea from "@material-ui/core/CardActionArea/CardActionArea";
 import { withRouter } from "react-router";
+import EthIcon from './EthIcon';
 
 const styles = (theme: Theme) =>
     createStyles({
@@ -70,10 +71,19 @@ class WeddingCard extends React.Component<any,
             <Card className={classes.card}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="Recipe" className={classes.avatar}>
-                            R
-                        </Avatar>
-                    }
+                        <EthIcon
+                            // Address to draw
+                            address="0xcbBc3D3d381f3A9a48CbAE9Ca701aC3c92e0aEA5"
+                            // scale * 8 pixel image size
+                            scale={32}
+                            // <img> props
+                            style={{
+                                width: '32px',
+                                height: '32px',
+                                borderRadius: '50%',
+                                background: 'white'
+                            }}
+                        />}
                     action={
                         <IconButton>
                             <MoreVertIcon/>

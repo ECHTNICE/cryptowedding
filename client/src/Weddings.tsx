@@ -24,7 +24,7 @@ class Weddings extends Component<IWeddingsProps> {
 
     return (
       <div>
-        <h2>Upcomming Weddings ({this.props.latestWeddingId.valueOf()+4})</h2>
+        <h2>Upcomming Weddings ({Number(this.props.latestWeddingId.valueOf())+4})</h2>
           <div>
               <WeddingCard weddingId="1" roomView="01"/>
               <WeddingCard weddingId="2" roomView="02" />
